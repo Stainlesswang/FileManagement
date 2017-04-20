@@ -1,0 +1,135 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="header" >
+<head >
+    <meta charset="utf-8"/>
+    <title>饭卡列表</title>
+</head>
+<body>
+<h2 align="center">增加档案</h2>
+<div class="line"></div>
+<form action="#" th:action="@{/appshop/addcard}" th:object="${file}" method="post"  class="form form-horizontal responsive" th:align="center" id="demoform">
+    <div class="row cl">
+        <label class="form-label col-sm-2"><span class="c-red">*</span>春秋季：</label>
+        <div class="formControls col-xs-5">
+            <input type="text" class="input-text"  th:field="*{jidu_id}" placeholder="输入春季或秋季" id="type" name="xueyuan"/>
+        </div>
+        <div class="col-xs-5"></div>
+    </div>
+
+    <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-2">档案类型：</label>
+        <div class="formControls col-xs-8 col-sm-9">
+            <input type="text"  th:field="*{type_id}" name="type_id" id="" placeholder="" value="" class="input-text"/>
+        </div>
+    </div>
+    <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-2">课程：</label>
+        <div class="formControls col-xs-8 col-sm-9">
+            <input type="text" th:field="*{course_id}" name="course_id" id="" placeholder="" value="" class="input-text"/>
+        </div>
+    </div>
+    <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>学院名称：</label>
+        <div class="formControls col-xs-8 col-sm-9"> <span class="select-box">
+				<select name="xueyuan" id="first"  class="select" th:field="*{xueyuan_id}" onchange="change()">
+                    <option  value="计算机与信息工程学院" selected="selected">计算机与信息工程学院</option>
+                    <option value="建筑学院" >建筑学院</option>
+                    <option value="艺术学院">艺术学院</option>
+                    <option value="外国语学院" >外国语学院</option>
+                </select>
+				</span> </div>
+    </div>
+    <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>专业名称：</label>
+        <div class="formControls col-xs-8 col-sm-9"> <span class="select-box">
+				<select name="zhuanye" id="second"  onchange="change2()" class="select" th:field="*{zhuanye_id}">
+                    <option  value="软件工程" selected="selected">软件工程</option>
+                    <option value="信息工程" >信息工程</option>
+                    <option value="物联网工程">物联网工程</option>
+                </select>
+				</span> </div>
+    </div>
+    <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-2">办公室：</label>
+        <div class="formControls col-xs-8 col-sm-9">
+            <input type="text" th:field="*{office_id}" name="office" id="office" placeholder="" value="" class="input-text"/>
+        </div>
+    </div>
+    <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>班级名称：</label>
+        <div class="formControls col-xs-8 col-sm-9"> <span class="select-box">
+				<select name="banji" id="three" class="select" th:field="*{banji_id}">
+                    <option  value="一班" selected="selected">一班</option>
+                    <option value="二班" >二班</option>
+                </select>
+				</span> </div>
+    </div>
+
+    <div class="row cl">
+        <div class="col-9 col-offset-2">
+            <input class="btn btn-primary radius" type="button"   onclick="ajax_()" value="&nbsp;&nbsp;提交&nbsp;&nbsp;"/>
+        </div>
+    </div>
+</form>
+
+<script type="text/javascript">
+    function ajax_(){
+        $.ajax({
+            type: "POST",
+            url : "addFile",
+            data: $("#demoform").serialize(),
+            success: function(){
+                layer.alert(" Add Success!");
+                window.parent.location.reload();
+                var index = parent.layer.getFrameIndex(window.name);//获取窗口索引
+                layer.close(index);
+            },
+            error: function(){
+                layer.alert("出错了！");
+            }
+        })}
+</script>
+<script>
+    function change()
+    {
+        var x = document.getElementById("first");
+        var y = document.getElementById("second");
+        y.options.length = 0; // 清除second下拉框的所有内容
+        if(x.selectedIndex == 0)
+        {
+            y.options.add(new Option("软件工程", "软件工程"));
+            y.options.add(new Option("信息工程", "信息工程", false, true));  // 默认选中省会城市
+            y.options.add(new Option("物联网工程", "物联网工程"));
+        }
+
+        if(x.selectedIndex == 1)
+        {
+
+            y.options.add(new Option("园林专业", "园林专业"));
+            y.options.add(new Option("桥梁专业", "桥梁专业", false, true));
+        }
+        if(x.selectedIndex == 2)
+        {
+
+
+            y.options.add(new Option("舞蹈专业", "舞蹈专业", false, true));
+
+        }
+        if(x.selectedIndex == 3)
+        {
+
+
+            y.options.add(new Option("英语专业", "英语专业", false, true));
+
+        }
+
+}
+
+
+
+</script>
+</body>
+</html>
