@@ -30,6 +30,7 @@ import java.io.IOException;
 
 /**
  * Created by stanwang on 2017/4/10.
+ *Spring security的配置文件
  */
 @Configuration
 @EnableWebSecurity

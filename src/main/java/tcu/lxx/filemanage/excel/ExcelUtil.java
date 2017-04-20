@@ -19,8 +19,18 @@ import java.util.Vector;
 
 /**
  * Created by stanwang on 2017/4/19.
+ *
  */
 public class ExcelUtil {
+
+    /**
+     *
+     * @param header 包含的属性为表头
+     * @param Sheet  工作表的名字
+     * @param content File的集合，显示的多条数据，一条数据代表一个File对象
+     * @param response 设置过响应头的response，目的是弹出下载选择路径。
+     * @return
+     */
     public Boolean exportExcel(File header,String Sheet ,List<File> content,HttpServletResponse response) {
         WritableWorkbook wwb;
 //        FileOutputStream fos;
@@ -43,7 +53,7 @@ public class ExcelUtil {
 
             //首先添加表头header
             content.add(0,header);
-            //    填充数据的内容
+            // 填充数据的内容，遍历创建表格
             File[] p = new File[content.size()];
             for (int i = 0; i < content.size(); i++){
                 p[i] = (File)content.get(i);

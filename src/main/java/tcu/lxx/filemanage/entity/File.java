@@ -2,6 +2,8 @@ package tcu.lxx.filemanage.entity;
 
 /**
  * Created by stanwang on 2017/4/14.
+ * 对应的是数据库中“file”表，每个字段相对应。
+ * 并且将联合查询出来的名字也显示出来方便显示。
  */
 public class File {
     private int file_id;

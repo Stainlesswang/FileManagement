@@ -2,6 +2,7 @@ package tcu.lxx.filemanage.entity;
 
 /**
  * Created by stanwang on 2017/4/10.
+ * 对应数据库“Role”表
  */
 public class Role {
     private String userId;

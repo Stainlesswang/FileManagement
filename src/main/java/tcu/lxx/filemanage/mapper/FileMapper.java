@@ -9,6 +9,7 @@ import java.util.List;
 
 /**
  * Created by stanwang on 2017/4/14.
+ * 每一个方法代表
  */
 public interface FileMapper {
 
