@@ -1,7 +1,6 @@
 package tcu.lxx.filemanage.entity;
 
 /**
- * Created by stanwang on 2017/4/10.
  * User表对应的实体类
  */
 public class UserInfo {

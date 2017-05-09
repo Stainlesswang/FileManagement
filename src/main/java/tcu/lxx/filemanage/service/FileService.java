@@ -4,13 +4,15 @@ import tcu.lxx.filemanage.entity.File;
 
 import java.util.List;
 
-/**
- * Created by stanwang on 2017/4/15.
- */
 public interface FileService {
-    public List<File> getAllFile();
+
+//查询所有file里边的集合
     public List<File> getAllFileVo();
+
     public int addFile(File file);
+
     public int deleteFileById(int fileid);
+    public File selctById(int fileid);
+    public int update(File file);
 
 }

@@ -1,7 +1,10 @@
 package tcu.lxx.filemanage.entity;
 
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+
 /**
- * Created by stanwang on 2017/4/14.
  * 对应的是数据库中“file”表，每个字段相对应。
  * 并且将联合查询出来的名字也显示出来方便显示。
  */
@@ -21,20 +24,50 @@ public class File {
     private String zhuanye;
     private String course;
     private String banji;
-    public File(String type, String jidu, String xueyuan, String office, String zhuanye, String course, String banji)
-    {
-        this.type=type;
-        this.jidu=jidu;
-        this.xueyuan=xueyuan ;
-        this.office=office;
-        this.zhuanye=zhuanye;
-        this.course=course;
-        this.banji=banji;
+    private String count;
+    private String FileCode;
+    private List<String> FileCodeList =new ArrayList<String>();
+
+    public File(String type, String jidu, String xueyuan, String office, String zhuanye, String course, String banji,String FileCode) {
+        this.type = type;
+        this.jidu = jidu;
+        this.xueyuan = xueyuan;
+        this.office = office;
+        this.zhuanye = zhuanye;
+        this.course = course;
+        this.banji = banji;
+        this.FileCode=FileCode;
 
     }
-    public File(){
+
+    public File() {
 
     }
+
+    public List getFileCodeList() {
+        return FileCodeList;
+    }
+
+    public void setFileCodeList(List fileCodeList) {
+        FileCodeList = fileCodeList;
+    }
+
+    public String getCount() {
+        return count;
+    }
+
+    public void setCount(String count) {
+        this.count = count;
+    }
+
+    public String getFileCode() {
+        return FileCode;
+    }
+
+    public void setFileCode(String fileCode) {
+        FileCode = fileCode;
+    }
+
     public String getXueyuan_id() {
         return xueyuan_id;
     }
@@ -66,6 +99,7 @@ public class File {
     public void setBanji_id(String banji_id) {
         this.banji_id = banji_id;
     }
+
     public int getFile_id() {
         return file_id;
     }
@@ -153,5 +187,27 @@ public class File {
 
     public void setBanji(String banji) {
         this.banji = banji;
+    }
+
+    @Override
+    public String toString() {
+
+        //得到当前的年份
+        Calendar a = Calendar.getInstance();
+        String year = String.valueOf(a.get(Calendar.YEAR));
+        //得到条码
+        String fileCode = year + "-" + type_id + "•" + xueyuan_id + "•" + jidu_id + "-" + office_id + course_id + banji_id;
+        //赋给他,可以用filecode属性了
+        setFileCode(fileCode);
+        int num=Integer.valueOf(count);
+        if(!"".equals(getCount())){
+            for (int i = 1; i <=num ; i++) {
+                String newFileCode = fileCode + "-" + i + "/" + count;
+                FileCodeList.add(newFileCode);
+            }
+            return fileCode;
+        }
+        return fileCode;
+
     }
 }

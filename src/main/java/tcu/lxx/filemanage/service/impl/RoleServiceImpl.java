@@ -8,9 +8,6 @@ import tcu.lxx.filemanage.service.RoleService;
 
 import java.util.List;
 
-/**
- * Created by stanwang on 2017/4/10.
- */
 @Service
 public class RoleServiceImpl implements RoleService {
     @Autowired

@@ -1,0 +1,169 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="header">
+<head>
+    <meta charset="utf-8"/>
+    <title>档案列表</title>
+</head>
+<body>
+<h2 align="center">增加档案</h2>
+
+<div class="line"></div>
+<form action="#" th:action="@{/updatefile}" th:object="${file}"
+      class="form form-horizontal responsive" th:align="center" id="demoform">
+
+    <fieldset id="custom_data" th:border="0">
+        <div class="row cl" hidden="hidden">
+            <input  th:value="${file.file_id}" th:field="*{file_id}"/>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>学院名称：</label>
+
+
+            <div class="formControls col-xs-8 col-sm-9 "> <span class="select-box">
+				<select name="xueyuan_id" th:selected="${file.xueyuan}"  class="select first" th:field="*{xueyuan_id}">
+
+                </select>
+
+				</span></div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>专业名称：</label>
+
+            <div class="formControls col-xs-8 col-sm-9 "> <span class="select-box">
+				<select name="zhuanye_id" class="select second" th:selected="${file.zhuanye}"  th:field="*{zhuanye_id}"></select>
+				</span></div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>班级名称：</label>
+
+            <div class="formControls col-xs-8 col-sm-9 "> <span class="select-box">
+				<select name="banji_id" class="select third" th:selected="${file.banji}"  th:field="*{banji_id}"></select>
+				</span></div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-sm-2"><span class="c-red">*</span>春秋季：</label>
+
+            <div class="formControls col-xs-5">
+                <select name="jidu_id" class="select" th:selected="${file.jidu}" th:field="*{jidu_id}">
+                    <option value="C" selected="selected">春季</option>
+                    <option value="Q">秋季</option>
+
+                </select>
+            </div>
+            <div class="col-xs-5"></div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2">档案类型：</label>
+
+            <div class="formControls col-xs-8 col-sm-9">
+                <select name="type_id" class="select" th:selected="${file.type}"   th:field="*{type_id}">
+                    <option value="SX" selected="selected">实习</option>
+                    <option value="KH">课程</option>
+                    <option value="KS">课设</option>
+                    <option value="LW">毕业论文</option>
+                    <option value="SJ">毕业设计</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2">办公室：</label>
+
+            <div class="formControls col-xs-8 col-sm-9">
+                <select name="office_id" class="select" th:selected="${file.office}"  >
+                    <option th:each="office:${offices}" th:field="*{office_id}" th:value="${office.office_id}"
+                            th:text="${office.office}">春季
+                    </option>
+                </select>
+
+            </div>
+        </div>
+
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2">课程：</label>
+
+            <div class="formControls col-xs-8 col-sm-9">
+
+
+                <select name="course_id" class="select" th:selected="${file.course}" >
+                    <option th:each="course:${courses}" th:field="*{course_id}" th:value="${course.course_id}"
+                            th:text="${course.course}">春季
+                    </option>
+
+                </select>
+
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2">档案袋总数：</label>
+
+            <div class="formControls col-xs-8 col-sm-9">
+                <select name="count" class="select" th:selected="${file.count}"  th:field="*{count}">
+                    <option value="1" selected="selected">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                </select>
+            </div>
+        </div>
+        <div class="row cl">
+            <div class="col-9 col-offset-2">
+                <input class="btn btn-primary radius" type="button" onclick="ajax_()"
+                       value="&nbsp;&nbsp;提交&nbsp;&nbsp;"/>
+            </div>
+        </div>
+    </fieldset>
+</form>
+<script src="http://cdn.staticfile.org/jquery/1.11.3/jquery.min.js"></script>
+<script type="text/javascript" th:src="@{js/jquery.cxselect.js}"></script>
+<script type="text/javascript">
+    (function () {
+        $.ajax({
+            type: "GET",
+            url: "test/xueyuan",
+            dataType: 'json',
+            success: function (data) {
+                $('#custom_data').cxSelect({
+
+                    selects: ['first', 'second', 'third'],
+                    required: true,
+                    jsonName: 'name',
+                    jsonValue: 'id',
+                    jsonSub: 'sub',
+                    url: data
+                });
+
+            },
+            error: function () {
+                layer.alert("test/xueyuan 出错了！");
+            }
+        })
+
+
+    })();
+
+    function ajax_() {
+        $.ajax({
+            type: "POST",
+            url: "updatefile",
+            data: $("#demoform").serialize(),
+            success: function () {
+                layer.alert(" update Success!");
+                window.parent.location.reload();
+                var index = parent.layer.getFrameIndex(window.name);//获取窗口索引
+                layer.close(index);
+            },
+            error: function () {
+                layer.alert("出错了！");
+            }
+        })
+    }
+</script>
+
+</body>
+</html>

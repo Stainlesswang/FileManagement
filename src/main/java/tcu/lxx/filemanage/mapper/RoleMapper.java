@@ -5,11 +5,8 @@ import tcu.lxx.filemanage.entity.Role;
 
 import java.util.List;
 
-/**
- * Created by stanwang on 2017/4/10.
- */
 public interface RoleMapper {
-//    SELECT
+    //    SELECT
 //    user_id userId,
 //    role_id roleId,
 //    role_name roleName,

@@ -2,36 +2,37 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
-      layout:decorator="header"
-        >
+      layout:decorator="header">
 <head >
     <meta charset="utf-8"/>
-    <title>饭卡列表</title>
+    <title>档案列表</title>
 </head>
 <body>
-<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 饭卡管理 <span class="c-gray en">&gt;</span> 饭卡列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 档案管理 <span class="c-gray en">&gt;</span> 档案列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="page-container">
     <div class="text-c"> <span class="select-box inline">
 		<select name="" class="select">
             <option value="0">全部分类</option>
-            <option value="1">早</option>
-            <option value="2">中</option>
-            <option value="3">晚</option>
+            <option value="1">计算机与信息工程学院</option>
+            <option value="2">建筑学院</option>
+            <option value="3">外国语学院</option>
+            <option value="4">土木工程学院</option>
         </select>
 		</span> 日期范围：
         <input type="text" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'logmax\')||\'%y-%M-%d\'}'})" id="logmin" class="input-text Wdate" style="width:120px;"/>
         -
         <input type="text" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'logmin\')}',maxDate:'%y-%M-%d'})" id="logmax" class="input-text Wdate" style="width:120px;"/>
-        <input type="text" name="" id="123" placeholder=" 资讯名称" style="width:250px" class="input-text"/>
-        <button name="" id="12" class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i> 搜资讯</button>
+        <input type="text" name="" id="123" placeholder=" 关键词" style="width:250px" class="input-text"/>
+        <button name="" id="12" class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
     </div>
     <div class="cl pd-5 bg-1 bk-gray mt-20">
         <!--<li><a href="javascript:;" onclick="member_add('添加用户','member-add.html','','510')"><i class="Hui-iconfont">&#xe60d;</i> 用户</a></li>-->
 
         <span class="l">
-            <a href="http://localhost:8080/Management/createExcel" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 导出Excel</a>
-            <a class="btn btn-primary radius" href="javascript:;" onclick="card_add('添加饭卡','/Management/fileadd','','510')"><i class="Hui-iconfont">&#xe600;
-            </i> 添加饭卡</a>
+            <a href="http://localhost:8080/Management/createExcelOnlyCode" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe644;</i> 只导出编码</a>
+            <a href="http://localhost:8080/Management/createExcel" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe644;</i> 导出Excel</a>
+            <a class="btn btn-primary radius" href="javascript:;" onclick="card_add('添加信息','/Management/fileadd','','510')"><i class="Hui-iconfont">&#xe600;
+            </i> 添加信息</a>
         </span>
         <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" />
         <span class="r">共有数据：<strong>54</strong> 条</span>
@@ -56,6 +57,7 @@
                 <th width="75">专业</th>
                 <th width="60">课程</th>
                 <th width="80">班级</th>
+                <th width="80">对应编码</th>
                 <th width="120">操作</th>
             </tr>
             </thead>
@@ -64,16 +66,17 @@
                 <td><input type="checkbox"  name=""/></td>
 
                 <td th:text="${file.file_id}" th:value="${file.file_id}" name="fileid" id="fileid"></td>
-                <td  th:text="${file.jidu_id}" style="cursor:pointer" class="text-primary" onClick="article_edit('查看','user-detail.html','10002')" title="查看用户信息"><u style="cursor:pointer" class="text-primary" onClick="article_edit('查看','user-detail.html','10002')" title="查看用户信息">详细信息</u></td>
+                <td  th:text="${file.jidu}" style="cursor:pointer" class="text-primary" onClick="article_edit('查看','user-detail.html','10002')" title="查看用户信息"><u style="cursor:pointer" class="text-primary" onClick="article_edit('查看','user-detail.html','10002')" title="查看用户信息">详细信息</u></td>
 
-                <td th:text="${file.xueyuan_id}"></td>
-                <td th:text="${file.office_id}"></td>
-                <td th:text="${file.zhuanye_id}"></td>
-                <td th:text="${file.course_id}"></td>
-                <td th:text="${file.banji_id}"></td>
+                <td th:text="${file.xueyuan}"></td>
+                <td th:text="${file.office}"></td>
+                <td th:text="${file.zhuanye}"></td>
+                <td th:text="${file.course}"></td>
+                <td th:text="${file.banji}"></td>
+                <td th:text="${file.FileCode}"></td>
                 <td class="f-14 td-manage" >
                     <a style="text-decoration:none" class="ml-5"
-                       onclick="member_add(this,'编辑','','400')" href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a>
+                       onclick="member_update(this,'编辑','','530')" href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a>
                     <a style="text-decoration:none"   class="ml-5"
                        onclick="article_del(this)" title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
             </tr>
@@ -92,40 +95,8 @@
             {"orderable":false,"aTargets":[0,4]}// 不参与排序的列
         ]
     });
-    /*导出表格ajax*/
-//    function createExcel(){
-//        $.ajax({
-//            type:"get",
-//            url:"/Management/createExcel",
-//            success:function(){
-//                layer.msg('已经成功导出!',{icon:1,time:1000});
-//            },
-//            error:function(){
-//                layer.msg('导出失败!',{icon:1,time:1000});
-//            }
-//
-//
-//        })
-//    }
-    /*资讯-添加*/
-    function article_add(title,url,w,h){
-        var index = layer.open({
-            type: 2,
-            title: title,
-            content: url
-        });
-        layer.full(index);
-    }
-    /*资讯-编辑*/
-    function article_edit(title,url,id,w,h){
-        var index = layer.open({
-            type: 2,
-            title: title,
-            content: url
-        });
-        layer.full(index);
-    }
-    /*资讯-删除*/
+
+    /*-删除*/
     function article_del(obj){
         layer.confirm('确认要删除吗？',function(index){
 
@@ -147,65 +118,23 @@
 
         });;
     }
-    /*资讯-审核*/
-    function article_shenhe(obj,id){
-        layer.confirm('审核文章？', {
-                    btn: ['通过','不通过','取消'],
-                    shade: false,
-                    closeBtn: 0
-                },
-                function(){
-                    $(obj).parents("tr").find(".td-manage").prepend('<a class="c-primary" onClick="article_start(this,id)" href="javascript:;" title="申请上线">申请上线</a>');
-                    $(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已发布</span>');
-                    $(obj).remove();
-                    layer.msg('已发布', {icon:6,time:1000});
-                },
-                function(){
-                    $(obj).parents("tr").find(".td-manage").prepend('<a class="c-primary" onClick="article_shenqing(this,id)" href="javascript:;" title="申请上线">申请上线</a>');
-                    $(obj).parents("tr").find(".td-status").html('<span class="label label-danger radius">未通过</span>');
-                    $(obj).remove();
-                    layer.msg('未通过', {icon:5,time:1000});
-                });
-    }
-    /*资讯-下架*/
-    function article_stop(obj,id){
 
-        layer.confirm('确认要下架吗？',function(index){
-            $(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="article_start(this,id)" href="javascript:;" title="发布"><i class="Hui-iconfont">&#xe603;</i></a>');
-            $(obj).parents("tr").find(".td-status").html('<span class="label label-defaunt radius">已下架</span>');
-            $(obj).remove();
-            layer.msg('已下架!',{icon: 5,time:1000});
-        });
-    }
 
-    /*资讯-发布*/
-    function article_start(obj,id){
-        layer.confirm('确认要发布吗？',function(index){
-            $(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="article_stop(this,id)" href="javascript:;" title="下架"><i class="Hui-iconfont">&#xe6de;</i></a>');
-            $(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已发布</span>');
-            $(obj).remove();
-            layer.msg('已发布!',{icon: 6,time:1000});
-        });
-    }
-    /*资讯-申请上线*/
-    function article_shenqing(obj,id){
-        $(obj).parents("tr").find(".td-status").html('<span class="label label-default radius">待审核</span>');
-        $(obj).parents("tr").find(".td-manage").html("");
-        layer.msg('已提交申请，耐心等待审核!', {icon: 1,time:2000});
-    }
+
+
     function card_add(title,url,w,h){
         layer_show(title,url,w,h);
     }
-    /*用户-添加*/
-    function member_add(obj,title,w,h){
+    /*更新！*/
+    function member_update(obj,title,w,h){
         var vardtr=$(obj).parents("tr");
-        var cardid=vardtr.find("td").eq(1);
+        var fileid=vardtr.find("td").eq(1);
         $.ajax({
             type: "POST",
-            url : "/appshop/update?cardid="+cardid.text(),
+            url : "/Management/fileupdate?fileid="+fileid.text(),
             success: function(){
                 layer.msg('成功查询数据!',{icon:1,time:1000});
-                layer_show(title,"/appshop/update?cardid="+cardid.text(),w,h);
+                layer_show(title,"/Management/fileupdate?fileid="+fileid.text(),w,h);
             },
             error : function(){
                 layer.msg('查询失败！',{icon:1,time:1000});

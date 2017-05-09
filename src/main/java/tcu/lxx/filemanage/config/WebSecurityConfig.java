@@ -29,8 +29,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Created by stanwang on 2017/4/10.
- *Spring security的配置文件
+ * Spring security的配置文件
  */
 @Configuration
 @EnableWebSecurity
@@ -45,8 +44,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
 
-        web.ignoring().antMatchers("/static/**","/**/*.html");
+        web.ignoring().antMatchers("/static/**", "/**/*.html");
     }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         //设置http头属性网上查询说是跨域问题;下边是三个属性
@@ -62,7 +62,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         //任何访问都必须授权
 //                .anyRequest().fullyAuthenticated()
 
-                //配置那些路径可以不用权限访问
+                        //配置那些路径可以不用权限访问
                 .antMatchers("/**/*.jpg").permitAll()
                 .antMatchers("/**/*.png").permitAll()
                 .antMatchers("/**/*.gif").permitAll()
@@ -73,7 +73,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/**/*.jsp").permitAll()
                 .antMatchers("/**/*.html").permitAll()
                 .antMatchers("/", "/login").permitAll()
+                .antMatchers("/test/**").permitAll()
                 .antMatchers("/fileadd").permitAll()
+
                 //只拦截拦截web访问
                 .anyRequest().authenticated()
                 .and()
@@ -87,17 +89,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout()
                 .permitAll();
 
-                        //登陆失败后的处理
+        //登陆失败后的处理
 //                .failureHandler(new SimpleUrlAuthenticationFailureHandler())
 //                .and()
-                        //登出后的处理
+        //登出后的处理
 //                .logout().logoutSuccessHandler(new RestLogoutSuccessHandler())
 //                .and()
-                        //认证不通过后的处理
+        //认证不通过后的处理
 //                .exceptionHandling()
 //                .authenticationEntryPoint(new RestAuthenticationEntryPoint())
         ;
     }
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth
@@ -114,7 +117,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         //密码加密
         return new BCryptPasswordEncoder(16);
     }

@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 /**
- * Created by stanwang on 2017/4/8.
+ * 此类是spring boot的启动类
  */
 @SpringBootApplication
 @ComponentScan//启动自动扫描
@@ -16,8 +16,8 @@ import org.springframework.context.annotation.ComponentScan;
 public class Application {
 
     //程序入口，Spring Boot启动入口
-    public static void main(String[] args){
+    public static void main(String[] args) {
 
-        SpringApplication.run(Application.class,args);
+        SpringApplication.run(Application.class, args);
     }
 }

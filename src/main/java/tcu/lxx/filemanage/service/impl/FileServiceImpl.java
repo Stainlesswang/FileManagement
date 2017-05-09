@@ -8,32 +8,38 @@ import tcu.lxx.filemanage.service.FileService;
 
 import java.util.List;
 
-/**
- * Created by stanwang on 2017/4/15.
- */
 @Service
 public class FileServiceImpl implements FileService {
     @Autowired
     FileMapper fileMapper;
-    @Override
-    public List<File> getAllFile() {
-       return fileMapper.getAllFile();
-    }
-
+//查询所有file记录
     @Override
     public List<File> getAllFileVo() {
-       return fileMapper.getAllFileVo();
+        return fileMapper.getAllFileVo();
     }
 
     @Override
     public int addFile(File file) {
-       return fileMapper.addFile(file);
+        return fileMapper.addFile(file);
 
     }
 
     @Override
     public int deleteFileById(int fileid) {
-       return fileMapper.deleteById(fileid);
+        return fileMapper.deleteById(fileid);
 
     }
+
+    @Override
+    public File selctById(int fileid) {
+        return fileMapper.selctById(fileid);
+    }
+
+    @Override
+    public int update(File file) {
+
+        return fileMapper.update(file);
+    }
+
+
 }
