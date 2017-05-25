@@ -14,6 +14,21 @@ public class OfficeServiceImol implements OfficeService {
     OfficeMapper officeMapper;
 
     @Override
+    public int addOffice(Office office) {
+        return officeMapper.addOffice(office);
+    }
+
+    @Override
+    public int deleteById(String officeid) {
+        return officeMapper.deleteById(officeid);
+    }
+
+    @Override
+    public int update(Office office) {
+        return officeMapper.update(office);
+    }
+
+    @Override
     public List<Office> findOfficeAll() {
         return officeMapper.findOfficeAll();
     }

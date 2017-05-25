@@ -17,7 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class UserInfoService implements UserService {
+public class
+        UserInfoService implements UserService {
     @Autowired
     UserInfoMapper userInfoMapper;
     @Autowired
@@ -28,6 +29,13 @@ public class UserInfoService implements UserService {
         return userInfo;
     }
 
+    @Override
+    public int addUser(UserInfo userInfo) {
+        return
+        userInfoMapper.addUser(userInfo);
+
+    }
+   //重写方法
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         UserInfo userInfo = userInfoMapper.getUserByName(s);

@@ -18,6 +18,36 @@ public interface FileMapper {
     @Insert("INSERT INTO file (type_id,jidu_id,xueyuan_id,office_id,zhuanye_id,course_id,banji_id,count)\n" +
             "VALUES(#{type_id},#{jidu_id},#{xueyuan_id},#{office_id},#{zhuanye_id},#{course_id},#{banji_id},#{count})")
     public int addFile(File file);
+    /**
+     * SELECT
+
+     f.*,
+     t.type,
+     j.jidu,
+     x.`name` xueyuan,
+     o.office,
+     z.`name` zhuanye,
+     c.course,
+     b.`name` banji
+     FROM
+     file f,
+     banji b,
+     type t,
+     jidu j,
+     xueyuan x,
+     office o,
+     zhuanye z,
+     course c
+     WHERE
+     f.banji_id = b.id AND
+     f.type_id = t.type_id AND
+     f.jidu_id = j.jidu_id AND
+     f.xueyuan_id = x.id AND
+     f.office_id = o.office_id AND
+     f.zhuanye_id = z.id AND
+     f.course_id = c.course_id
+     */
+
 
     @Select("SELECT\n" +
             "\tf.*,\n" +

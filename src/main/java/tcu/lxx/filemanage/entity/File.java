@@ -25,6 +25,11 @@ public class File {
     private String course;
     private String banji;
     private String count;
+
+
+
+
+    //执行tostring方法后才有值
     private String FileCode;
     private List<String> FileCodeList =new ArrayList<String>();
 

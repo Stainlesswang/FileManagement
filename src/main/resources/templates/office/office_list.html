@@ -1,0 +1,130 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="header">
+<head >
+    <meta charset="utf-8"/>
+    <title>课程列表</title>
+</head>
+<body>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 教研室管理 <span class="c-gray en">&gt;</span> 教研室列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="page-container">
+    <div class="text-c"> <span class="select-box inline">
+		<select name="" class="select">
+            <option value="0">全部分类</option>
+            <option value="1">计算机与信息工程学院</option>
+            <option value="2">建筑学院</option>
+            <option value="3">外国语学院</option>
+            <option value="4">土木工程学院</option>
+        </select>
+		</span> 日期范围：
+        <input type="text" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'logmax\')||\'%y-%M-%d\'}'})" id="logmin" class="input-text Wdate" style="width:120px;"/>
+        -
+        <input type="text" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'logmin\')}',maxDate:'%y-%M-%d'})" id="logmax" class="input-text Wdate" style="width:120px;"/>
+        <input type="text" name="" id="123" placeholder=" 关键词" style="width:250px" class="input-text"/>
+        <button name="" id="12" class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
+    </div>
+    <div class="cl pd-5 bg-1 bk-gray mt-20">
+        <!--<li><a href="javascript:;" onclick="member_add('添加用户','member-add.html','','510')"><i class="Hui-iconfont">&#xe60d;</i> 用户</a></li>-->
+
+        <span class="l">
+            <a  class="btn btn-danger radius"><i class="Hui-iconfont">&#xe609;</i> 批量删除</a>
+            <a class="btn btn-primary radius" href="javascript:;" onclick="card_add('添加教研室','/Management/officeadd','','510')"><i class="Hui-iconfont">&#xe600;
+            </i> 添加教研室</a>
+        </span>
+        <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" />
+        <span class="r">共有数据：<strong>54</strong> 条</span>
+    </div>
+    <div class="mt-20">
+        <table class="table table-border table-bordered table-bg table-hover table-sort" id="noon">
+            <thead>
+
+            <tr class="text-c">
+                <th width="25"><input type="checkbox" name="" value=""/></th>
+                <th width="80">教研室编号</th>
+
+                <th width="80">教研室名称</th>
+                <th width="80">学院</th>
+                <th width="120">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="text-c"  th:each="office:${officelist}">
+                <td><input type="checkbox"  name=""/></td>
+
+                <td th:text="${office.office_id}" th:value="${office.office_id}" name="officeid" id="officeid"></td>
+                <td  th:text="${office.office}" style="cursor:pointer" class="text-primary" onClick="article_edit('查看','user-detail.html','10002')" title="查看用户信息"><u style="cursor:pointer" class="text-primary" onClick="article_edit('查看','user-detail.html','10002')" title="查看用户信息">详细信息</u></td>
+
+                <td th:text="${office.pid}"></td>
+                <td class="f-14 td-manage" >
+                    <a style="text-decoration:none" class="ml-5"
+                       onclick="member_update(this,'编辑','','530')" href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a>
+                    <a style="text-decoration:none"   class="ml-5"
+                       onclick="article_del(this)" title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
+            </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $('.table-sort').dataTable({
+        "aaSorting": [[ 1, "desc" ]],//默认第几个排序
+        "bStateSave": true,//状态保存
+        "aoColumnDefs": [
+            //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
+            {"orderable":false,"aTargets":[0,4]}// 不参与排序的列
+        ]
+    });
+
+    /*-删除*/
+    function article_del(obj){
+        layer.confirm('确认要删除吗？',function(index){
+
+
+            var cardtr= $(obj).parents("tr");
+            var fileid=cardtr.find("td").eq(1);
+
+            $.ajax({
+                type: "POST",
+                url : "/Management/deleteoffice?officeid="+fileid.text(),
+                success: function(){
+                    layer.msg('已删除数据!',{icon:1,time:1000});
+                    $(obj).parents("tr").remove();
+                },
+                error : function(){
+                    layer.msg('删除失败！',{icon:1,time:1000});
+                }
+            })
+
+        });;
+    }
+
+
+
+
+    function card_add(title,url,w,h){
+        layer_show(title,url,w,h);
+    }
+    /*更新！*/
+    function member_update(obj,title,w,h){
+        var vardtr=$(obj).parents("tr");
+        var fileid=vardtr.find("td").eq(1);
+        $.ajax({
+            type: "POST",
+            url : "/Management/fileupdate?fileid="+fileid.text(),
+            success: function(){
+                layer.msg('成功查询数据!',{icon:1,time:1000});
+                layer_show(title,"/Management/fileupdate?fileid="+fileid.text(),w,h);
+            },
+            error : function(){
+                layer.msg('查询失败！',{icon:1,time:1000});
+            }
+        })
+
+    }
+</script>
+</body>
+</html>

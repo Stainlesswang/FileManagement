@@ -62,7 +62,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         //任何访问都必须授权
 //                .anyRequest().fullyAuthenticated()
 
-                        //配置那些路径可以不用权限访问
+                 //配置那些路径可以不用权限访问
                 .antMatchers("/**/*.jpg").permitAll()
                 .antMatchers("/**/*.png").permitAll()
                 .antMatchers("/**/*.gif").permitAll()
@@ -75,12 +75,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/", "/login").permitAll()
                 .antMatchers("/test/**").permitAll()
                 .antMatchers("/fileadd").permitAll()
+                .antMatchers("/register").permitAll()
+                .antMatchers("/addUser").permitAll()
 
                 //只拦截拦截web访问
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                        //登陆成功后的处理，因为是API的形式所以不用跳转页面
+                //登陆成功后的处理，因为是API的形式所以不用跳转页面
                 .successHandler(new RestAuthenticationSuccessHandler())
                 .loginPage("/login")
                 .failureUrl("/login?error")
@@ -100,7 +102,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .authenticationEntryPoint(new RestAuthenticationEntryPoint())
         ;
     }
-
+//调用userservice，走的是userservice方法
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth

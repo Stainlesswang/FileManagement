@@ -100,7 +100,7 @@
     function article_del(obj){
         layer.confirm('确认要删除吗？',function(index){
 
-
+           //找到行列，1代表第二个格子
             var cardtr= $(obj).parents("tr");
             var fileid=cardtr.find("td").eq(1);
 

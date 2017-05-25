@@ -117,16 +117,25 @@ public class ExcelUtil {
             //设置每一个cell对齐方式,都是居中
             wcf.setVerticalAlignment(VerticalAlignment.CENTRE);
             wcf.setAlignment(Alignment.CENTRE);
-//            设置每一个cell的宽度为82
+//            设置每一个cell的宽度为82（A4）
             ws.getSettings().setDefaultColumnWidth(82);
 
 
 
 
-            //将File对象里边的对象取出来成为装到一个List里边，
+
+
+
+
+
+            //将File对象里边的FileCodeList取出来装到一个List里边
+
+
+
+            //新建一个list集合
             List<String> listCode=new ArrayList<String>();
 
-            //循环遍历吧每一个File对象里边的 FileCodeList取出来,增加到新建的listCode集合里边
+            //循环遍历把每一个File对象里边的 FileCodeList取出来,增加到新建的listCode集合里边
             File[] f = new File[content.size()];
             for (int i = 0; i < content.size(); i++) {
                 f[i] = (File) content.get(i);
@@ -144,6 +153,18 @@ public class ExcelUtil {
 
             //执行创建方法
             wwb.write();
+
+
+
+
+
+
+
+
+
+
+
+
 
             //关闭wwb流
             wwb.close();

@@ -117,10 +117,12 @@
 <script type="text/javascript">
     (function () {
         $.ajax({
+            //增加页面的学院专业班级根据路径得到json数据
             type: "GET",
             url: "test/xueyuan",
             dataType: 'json',
             success: function (data) {
+                //通过用cxSelect插件实现了多级连动
                 $('#custom_data').cxSelect({
 
                     selects: ['first', 'second', 'third'],
@@ -140,14 +142,17 @@
 
     })();
 </script>
+//异步请求
 <script type="text/javascript">
     function ajax_() {
         $.ajax({
             type: "POST",
             url: "addFile",
+            //把form表单封装成一个对象
             data: $("#demoform").serialize(),
             success: function () {
                 layer.alert(" Add Success!");
+                //关闭增加界面，返回主页
                 window.parent.location.reload();
                 var index = parent.layer.getFrameIndex(window.name);//获取窗口索引
                 layer.close(index);

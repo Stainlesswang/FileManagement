@@ -14,6 +14,21 @@ public class CourseServiceImol implements CourseService {
     CourseMapper courseMapper;
 
     @Override
+    public int addCourse(Course course) {
+        return courseMapper.addCourse(course);
+    }
+
+    @Override
+    public int deleteById(String courseid) {
+        return courseMapper.deleteById(courseid);
+    }
+
+    @Override
+    public int update(Course course) {
+        return courseMapper.update(course);
+    }
+
+    @Override
     public List<Course> findCourseAll() {
         return courseMapper.findCourseAll();
     }

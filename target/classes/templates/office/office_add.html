@@ -1,0 +1,77 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="header">
+<head>
+    <meta charset="utf-8"/>
+    <title>档案列表</title>
+</head>
+<body>
+<h2 align="center">增加教研室</h2>
+
+<div class="line"></div>
+<form  th:object="${office}" method="post"
+       class="form form-horizontal responsive" th:align="center" id="demoform">
+
+    <fieldset id="custom_data" th:border="0">
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>所属学院名称：</label>
+
+            <div class="formControls col-xs-8 col-sm-9 "> <span class="select-box">
+                <select name="pid" class="select" >
+                    <option th:each="xueyuan:${xueyuans}" th:field="*{pid}" th:value="${xueyuan.id}"
+                            th:text="${xueyuan.name}">
+                    </option>
+                </select>
+				</span></div>
+        </div>
+
+
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2">教研室名称：</label>
+
+            <div class="formControls col-xs-8 col-sm-9">
+                <input name="type_id" class="select" th:field="*{office}"/>
+            </div>
+        </div>
+
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2">教研室编号：</label>
+
+            <div class="formControls col-xs-8 col-sm-9">
+                <input name="office_id" class="select"  th:field="*{office_id}" />
+
+
+            </div>
+        </div>
+
+        <div class="row cl">
+            <div class="col-9 col-offset-2">
+                <input class="btn btn-primary radius" type="button" onclick="ajax_()"
+                       value="&nbsp;&nbsp;提交&nbsp;&nbsp;"/>
+            </div>
+        </div>
+    </fieldset>
+</form>
+
+<script type="text/javascript">
+    function ajax_() {
+        $.ajax({
+            type: "POST",
+            url: "addoffice",
+            data: $("#demoform").serialize(),
+            success: function () {
+                layer.alert(" Add Success!");
+                window.parent.location.reload();
+                var index = parent.layer.getFrameIndex(window.name);//获取窗口索引
+                layer.close(index);
+            },
+            error: function () {
+                layer.alert("出错了,输入的编号已经存在！");
+            }
+        })
+    }
+</script>
+</body>
+</html>

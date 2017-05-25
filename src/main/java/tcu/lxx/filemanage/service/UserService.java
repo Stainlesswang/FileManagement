@@ -12,5 +12,8 @@ public interface UserService extends UserDetailsService {
      * @param userName
      * @return
      */
+    //只是声明
     public UserInfo getUserByName(String userName);
+    public int addUser(UserInfo userInfo);
+
 }

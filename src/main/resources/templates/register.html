@@ -1,0 +1,103 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="header">
+<head>
+    <meta charset="utf-8"/>
+    <title>档案列表</title>
+</head>
+<body>
+<h2 align="center">注册</h2>
+
+<div class="line"></div>
+//一个form表单是一个userinfo对象
+<form th:object="${userinfo}" method="post"
+      class="form form-horizontal responsive" th:align="center" id="demoform">
+
+    <fieldset id="custom_data" th:border="0">
+        <div class="row cl">
+            <label class="form-label col-sm-2"><span class="c-red">*</span>姓名：</label>
+
+            <div class="formControls col-xs-5">
+                <input name="jidu_id" class="select" th:field="*{name}"/>
+            </div>
+            <div class="col-xs-5"></div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2">密码：</label>
+
+            <div class="formControls col-xs-8 col-sm-9">
+                <input name="password" class="select" type="password" th:field="*{password}"/>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2">确认密码：</label>
+
+            <div class="formControls col-xs-8 col-sm-9">
+                <input name="sure" class="select" type="password"/>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2">性别：</label>
+
+            <div class="formControls col-xs-8 col-sm-9">
+                <select name="type_id" class="select" th:field="*{sex}">
+                    <option value="男" selected="selected">男</option>
+                    <option value="女">女</option>
+
+                </select>
+            </div>
+        </div>
+
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2">电话：</label>
+
+            <div class="formControls col-xs-8 col-sm-9">
+                <input name="office_id" class="select" th:field="*{phone}" />
+
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2">办公室：</label>
+
+            <div class="formControls col-xs-8 col-sm-9">
+                <select name="office_id" class="select" th:field="*{dept}"  >
+                    <option th:each="office:${offices}" th:value="${office.office}"
+                            th:text="${office.office}">
+                    </option>
+                </select>
+
+            </div>
+        </div>
+
+        <div class="row cl">
+            <div class="col-9 col-offset-2">
+                <input class="btn btn-primary radius" type="button" onclick="ajax_()"
+                       value="&nbsp;&nbsp;注册&nbsp;&nbsp;"/>
+            </div>
+        </div>
+    </fieldset>
+</form>
+<script type="text/javascript">
+    function ajax_() {
+        $.ajax({
+            type: "POST",
+            url: "addUser",
+            data: $("#demoform").serialize(),
+            success: function () {
+                layer.alert(" Add Success!");
+                window.parent.location.reload();
+                var index = parent.layer.getFrameIndex(window.name);//获取窗口索引
+                layer.close(index);
+            },
+            error: function () {
+                layer.alert("出错了！");
+            }
+        })
+    }
+
+</script>
+
+</body>
+</html>

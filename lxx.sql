@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : stanwang
-Source Server Version : 50716
+Source Server         : lxx
+Source Server Version : 50511
 Source Host           : localhost:3306
 Source Database       : lxx
 
 Target Server Type    : MYSQL
-Target Server Version : 50716
+Target Server Version : 50511
 File Encoding         : 65001
 
-Date: 2017-05-03 19:09:56
+Date: 2017-05-25 09:16:47
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -31,6 +31,17 @@ CREATE TABLE `banji` (
 -- ----------------------------
 INSERT INTO `banji` VALUES ('0101161', '16园林一班', '0101');
 INSERT INTO `banji` VALUES ('0101162', '16园林二班', '0101');
+INSERT INTO `banji` VALUES ('0103141', '14桥梁一班', '0103');
+INSERT INTO `banji` VALUES ('0106131', '13建筑一班', '0106');
+INSERT INTO `banji` VALUES ('0401131', '13多媒体一班', '0401');
+INSERT INTO `banji` VALUES ('0401151', '15多媒体一班', '0401');
+INSERT INTO `banji` VALUES ('0402151', '15雕塑一班', '0402');
+INSERT INTO `banji` VALUES ('0402152', '15雕塑二班', '0402');
+INSERT INTO `banji` VALUES ('0403151', '15舞蹈一班', '0403');
+INSERT INTO `banji` VALUES ('0601141', '14日语一班', '0601');
+INSERT INTO `banji` VALUES ('0601142', '14日语二班', '0601');
+INSERT INTO `banji` VALUES ('0602161', '16英语一班', '0602');
+INSERT INTO `banji` VALUES ('0605141', '14西班牙语一班', '0605');
 INSERT INTO `banji` VALUES ('0700141', '14信息一班', '0700');
 INSERT INTO `banji` VALUES ('0700142', '14信息二班', '0700');
 INSERT INTO `banji` VALUES ('0702151', '15物联网一班', '0702');
@@ -53,13 +64,22 @@ CREATE TABLE `course` (
 -- ----------------------------
 -- Records of course
 -- ----------------------------
+INSERT INTO `course` VALUES ('02', '泥塑', '04');
+INSERT INTO `course` VALUES ('03', '现代舞', '04');
 INSERT INTO `course` VALUES ('04', '计算机组成原理', '07');
 INSERT INTO `course` VALUES ('05', '操作系统', '07');
 INSERT INTO `course` VALUES ('06', '编译原理', '07');
+INSERT INTO `course` VALUES ('07', '建模', '04');
 INSERT INTO `course` VALUES ('08', '数据库原理', '07');
+INSERT INTO `course` VALUES ('11', '结构力学', '01');
 INSERT INTO `course` VALUES ('12', '计算机网络原理', '07');
 INSERT INTO `course` VALUES ('13', '离散数学', '07');
+INSERT INTO `course` VALUES ('14', '高等数学', '01');
+INSERT INTO `course` VALUES ('16', '现代建筑史', '01');
 INSERT INTO `course` VALUES ('17', '算法设计与分析', '07');
+INSERT INTO `course` VALUES ('18', '西班牙语', '06');
+INSERT INTO `course` VALUES ('19', '日语', '06');
+INSERT INTO `course` VALUES ('20', '英语', '06');
 
 -- ----------------------------
 -- Table structure for file
@@ -74,20 +94,34 @@ CREATE TABLE `file` (
   `zhuanye_id` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `course_id` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `banji_id` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
-  `dec` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `count` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   PRIMARY KEY (`file_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=gbk;
+) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=gbk;
 
 -- ----------------------------
 -- Records of file
 -- ----------------------------
-INSERT INTO `file` VALUES ('1', '实习', '秋季', '计算机学院', '软件工程办公室', '软件工程', '算法设计', '13软件一班', null);
-INSERT INTO `file` VALUES ('2', '课设', '春季', '计算机学院', '软件工程办公室', '软件工程', '数据结构', '13软件一班', null);
-INSERT INTO `file` VALUES ('3', 'KH', 'C', '07', '03', '0707', '04', '0707131', null);
-INSERT INTO `file` VALUES ('4', 'SJ', 'Q', '07', '11', '0707', '08', '0707141', null);
-INSERT INTO `file` VALUES ('24', 'KH', 'C', '01', '01', '0101', '04', '0101161', null);
-INSERT INTO `file` VALUES ('25', 'KH', 'C', '01', '01', '0101', '04', '0101161', null);
-INSERT INTO `file` VALUES ('26', 'LW', 'Q', '07', '05', '0707', '08', '0707141', null);
+INSERT INTO `file` VALUES ('1', '实习', '秋季', '计算机学院', '软件工程办公室', '软件工程', '算法设计', '13软件一班', '1');
+INSERT INTO `file` VALUES ('2', '课设', '春季', '计算机学院', '软件工程办公室', '软件工程', '数据结构', '13软件一班', '3');
+INSERT INTO `file` VALUES ('29', 'KS', 'C', '06', '01', '0602', '04', null, '2');
+INSERT INTO `file` VALUES ('31', 'KH', 'C', '04', '04', '0403', '04', null, '1');
+INSERT INTO `file` VALUES ('32', 'SX', 'C', '04', '11', '0403', '05', null, '3');
+INSERT INTO `file` VALUES ('33', 'SX', 'C', '04', '01', '0403', '13', null, '2');
+INSERT INTO `file` VALUES ('34', 'KH', 'Q', '06', '13', '0602', '13', null, '3');
+INSERT INTO `file` VALUES ('35', 'KH', 'Q', '06', '13', '0602', '13', null, '2');
+INSERT INTO `file` VALUES ('38', 'KH', 'C', '06', '11', '0602', '04', null, '1');
+INSERT INTO `file` VALUES ('43', 'SX', 'Q', '06', '13', '0602', '17', null, '3');
+INSERT INTO `file` VALUES ('44', 'KH', 'C', '04', '01', '0403', '04', null, '2');
+INSERT INTO `file` VALUES ('46', 'KH', 'Q', '06', '12', '0602', '05', null, '2');
+INSERT INTO `file` VALUES ('47', 'KH', 'C', '01', '01', '0101', '04', '0101161', '1');
+INSERT INTO `file` VALUES ('48', 'KH', 'C', '04', '01', '0403', '04', null, '1');
+INSERT INTO `file` VALUES ('50', 'KS', 'C', '01', '01', '0106', '02', '0106131', '1');
+INSERT INTO `file` VALUES ('51', 'KH', 'C', '01', '01', '0101', '02', '0101161', '3');
+INSERT INTO `file` VALUES ('52', 'KH', 'C', '01', '01', '0101', '02', '0101161', '1');
+INSERT INTO `file` VALUES ('53', 'KH', 'C', '04', '01', '0401', '11', '0401131', '1');
+INSERT INTO `file` VALUES ('54', 'KH', 'C', '06', '01', '0601', '02', '0601141', '3');
+INSERT INTO `file` VALUES ('55', 'KH', 'C', '01', '01', '0101', '19', '0101161', '1');
+INSERT INTO `file` VALUES ('56', 'SX', 'C', '07', '01', '0707', '13', '0707132', '3');
 
 -- ----------------------------
 -- Table structure for jidu
@@ -120,18 +154,19 @@ CREATE TABLE `office` (
 -- Records of office
 -- ----------------------------
 INSERT INTO `office` VALUES ('01', '电子与信息工程系', '07');
-INSERT INTO `office` VALUES ('02', '系办公室', '07');
-INSERT INTO `office` VALUES ('03', '学生工作办公室', '07');
-INSERT INTO `office` VALUES ('04', '计算机基础教研室', '07');
-INSERT INTO `office` VALUES ('05', '计算机应用教研室', '07');
+INSERT INTO `office` VALUES ('02', '系办公室', '01');
+INSERT INTO `office` VALUES ('03', '学生工作办公室', '04');
+INSERT INTO `office` VALUES ('04', '基础教研室', '01');
+INSERT INTO `office` VALUES ('05', '应用教研室', '04');
 INSERT INTO `office` VALUES ('06', '网络工程教研室', '07');
 INSERT INTO `office` VALUES ('07', '电子信息工程教研室', '07');
 INSERT INTO `office` VALUES ('08', '电气工程及其自动化教研室', '07');
-INSERT INTO `office` VALUES ('09', '计算机综合实验室', '07');
-INSERT INTO `office` VALUES ('10', '计算机教学实验中心', '07');
+INSERT INTO `office` VALUES ('09', '综合实验室', '06');
+INSERT INTO `office` VALUES ('10', '教学学实验中心', '06');
 INSERT INTO `office` VALUES ('11', '电子信息工程实验室', '07');
 INSERT INTO `office` VALUES ('12', '电气工程及其自动化实验室', '07');
-INSERT INTO `office` VALUES ('13', '电工电子教学实验中心', '07');
+INSERT INTO `office` VALUES ('13', '教学实验中心', '04');
+INSERT INTO `office` VALUES ('15', '教学中心', '04');
 
 -- ----------------------------
 -- Table structure for role
@@ -177,18 +212,26 @@ CREATE TABLE `user` (
   `user_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
   `phone` varchar(255) DEFAULT NULL,
-  `password` varchar(255) CHARACTER SET latin1 DEFAULT NULL,
-  `dept` varchar(255) CHARACTER SET latin1 NOT NULL,
-  `sex` varchar(100) CHARACTER SET latin1 NOT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `dept` varchar(255) DEFAULT NULL,
+  `sex` varchar(100) NOT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('1', '7player', '18856439987', '123456', 'fg', 'd');
-INSERT INTO `user` VALUES ('2', 'a', '1353434456', '12', 'ceshi', 'kk');
-INSERT INTO `user` VALUES ('3', 'b', '13177865435', '12', 'h', 'f');
+INSERT INTO `user` VALUES ('1', '钱玉', '18856439987', '123456', '建筑系', '女');
+INSERT INTO `user` VALUES ('2', '王岩', '1353434456', '123321', '建筑系', '男');
+INSERT INTO `user` VALUES ('3', '王钟付', '13177865435', '123457', '外语系', '女');
+INSERT INTO `user` VALUES ('4', '李晓旭', '15102209775', '123456', '外语系', '男');
+INSERT INTO `user` VALUES ('5', '李想', '13526547895', '789987', '计算机系', '男');
+INSERT INTO `user` VALUES ('6', '王库', '15246585698', '456654', '计算机系', '男');
+INSERT INTO `user` VALUES ('7', '赵玉', '15123654236', '147258', '教学实验中心', '女');
+INSERT INTO `user` VALUES ('8', '张开度', '15425698745', 'gggg', '电子与信息工程系', '男');
+INSERT INTO `user` VALUES ('9', '张瑟', '15104406547', 'bbb', '综合实验室', '男');
+INSERT INTO `user` VALUES ('10', '丁咖', '138965454789', '55555', '电子与信息工程系', '男');
+INSERT INTO `user` VALUES ('11', '李雨', '14547895632', '456789', '应用教研室', '男');
 
 -- ----------------------------
 -- Table structure for user_role
@@ -240,10 +283,15 @@ CREATE TABLE `zhuanye` (
 -- ----------------------------
 -- Records of zhuanye
 -- ----------------------------
-INSERT INTO `zhuanye` VALUES ('0101', '园林专业', '01');
-INSERT INTO `zhuanye` VALUES ('0103', '桥梁专业', '01');
-INSERT INTO `zhuanye` VALUES ('0403', '舞蹈专业', '04');
-INSERT INTO `zhuanye` VALUES ('0602', '英语专业', '06');
+INSERT INTO `zhuanye` VALUES ('0101', '园林', '01');
+INSERT INTO `zhuanye` VALUES ('0103', '桥梁', '01');
+INSERT INTO `zhuanye` VALUES ('0106', '建筑', '01');
+INSERT INTO `zhuanye` VALUES ('0401', '多媒体', '04');
+INSERT INTO `zhuanye` VALUES ('0402', '雕塑', '04');
+INSERT INTO `zhuanye` VALUES ('0403', '舞蹈', '04');
+INSERT INTO `zhuanye` VALUES ('0601', '日语', '06');
+INSERT INTO `zhuanye` VALUES ('0602', '英语', '06');
+INSERT INTO `zhuanye` VALUES ('0605', '西班牙语', '06');
 INSERT INTO `zhuanye` VALUES ('0700', '信息工程', '07');
 INSERT INTO `zhuanye` VALUES ('0702', '物联网工程', '07');
 INSERT INTO `zhuanye` VALUES ('0707', '软件工程', '07');
